@@ -1,0 +1,15 @@
+# Ignore tests results #
+########################
+
+playwright-report
+Screenshots
+
+# Ignore node modules #
+#######################
+
+node_modules
+
+# System files #
+################
+
+.Ds_Store
