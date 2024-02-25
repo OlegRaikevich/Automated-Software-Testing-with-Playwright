@@ -23,4 +23,22 @@ test.describe("Filter Transactions", () => {
         const tableRowWithdrawal = page.locator("#all_transactions_for_account thead th:nth-child(4)")
         await expect(tableRowWithdrawal).toContainText('Withdrawal')
     })
+
+    test("Transactions Checking account", async ({ page }) => {
+        await page.selectOption("#aa_accountId", "2")
+
+        const tableRowDate = page.locator("#all_transactions_for_account thead th:nth-child(1)")
+        await expect(tableRowDate).toContainText('Date')
+
+
+        const tableRowDescription = page.locator("#all_transactions_for_account thead th:nth-child(2)")
+        await expect(tableRowDescription).toContainText('Description')
+
+        const tableRowDeposit = page.locator("#all_transactions_for_account thead th:nth-child(3)")
+        await expect(tableRowDeposit).toContainText('Deposit')
+
+        const tableRowWithdrawal = page.locator("#all_transactions_for_account thead th:nth-child(4)")
+        await expect(tableRowWithdrawal).toContainText('Withdrawal')
+    })
+
 })
