@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test"
 import { login } from "../../helpers"
 
-test.describe("Filter Transactions", () => {
+test.describe.parallel("Filter Transactions", () => {
     test.beforeEach(async ({ page }) => {
         await login(page)
         await page.goto('http://zero.webappsecurity.com/bank/account-activity.html')
@@ -60,6 +60,14 @@ test.describe("Filter Transactions", () => {
 
     test("Transactions Creadit Card account", async ({ page }) => {
         await page.selectOption("#aa_accountId", "5")
+
+        const noResults = page.locator("div.well")
+        await expect(noResults).toBeVisible
+        await expect(noResults).toContainText('No results.')
+    })
+
+    test("Transactions Brokerage account", async ({ page }) => {
+        await page.selectOption("#aa_accountId", "6")
 
         const noResults = page.locator("div.well")
         await expect(noResults).toBeVisible
