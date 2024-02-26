@@ -73,5 +73,4 @@ test.describe.parallel("Filter Transactions", () => {
         await expect(noResults).toBeVisible
         await expect(noResults).toContainText('No results.')
     })
-
 })
