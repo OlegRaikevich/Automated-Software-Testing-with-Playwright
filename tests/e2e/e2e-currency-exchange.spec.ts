@@ -9,9 +9,7 @@ test.describe.only("Currency Exchange", () => {
 
     test("Purchase Foreign Currency", async ({ page }) => {
         await page.click('a[href="#ui-tabs-3"]')
-        await page.pause()
         await page.selectOption("#pc_currency", "EUR")
-        await page.pause()
         await page.type("#pc_amount", '500')
         await page.click("#pc_inDollars_true")
         await page.click('#purchase_cash')
