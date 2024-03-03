@@ -16,13 +16,23 @@ test.describe.only("Feedback Form", () => {
     })
 
     test('Reset feedback form', async ({ page }) => {
-        await feedbackPage.fillFeedbackForm('user', 'email@email.com', 'subject', 'some text')
+        await feedbackPage.fillFeedbackForm(
+            'user',
+            'email@email.com',
+            'subject',
+            'some text'
+        )
         await feedbackPage.resetForm()
         await feedbackPage.assertResetForm()
     })
 
     test('Submit feedback form', async ({ page }) => {
-        await feedbackPage.fillFeedbackForm('user', 'email@email.com', 'subject', 'some text')
+        await feedbackPage.fillFeedbackForm(
+            'user',
+            'email@email.com',
+            'subject',
+            'some text'
+        )
         await feedbackPage.submitForm()
         await feedbackPage.assertFeedbackTitle()
     })

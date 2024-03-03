@@ -21,7 +21,12 @@ export class FeedbackPage {
         this.feedbackTitle = page.locator('#feedback-title')
     }
 
-    async fillFeedbackForm(name: string, email: string, subject: string, comment: string) {
+    async fillFeedbackForm(
+        name: string,
+        email: string,
+        subject: string,
+        comment: string
+    ) {
         await this.nameInput.type(name)
         await this.emailInput.type(email)
         await this.subjectInput.type(subject)
