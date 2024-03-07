@@ -21,6 +21,7 @@ export class LoginPage {
         await this.usernameInput.type(username)
         await this.passwordInput.type(password)
         await this.submitButton.click()
+        await this.page.goBack()
     }
 
     async assertErrorMessage() {

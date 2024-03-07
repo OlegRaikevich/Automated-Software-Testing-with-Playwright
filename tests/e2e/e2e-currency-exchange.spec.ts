@@ -1,13 +1,23 @@
 import { expect, test } from "@playwright/test"
-import { login } from "../../helpers"
+import { HomePage } from "../../page-objects/HomePage"
+import { LoginPage } from "../../page-objects/LoginPage"
 
 test.describe("Currency Exchange", () => {
+    let homePage: HomePage
+    let loginPage: LoginPage
+
     test.beforeEach(async ({ page }) => {
-        await login(page)
-        await page.goto('http://zero.webappsecurity.com/bank/pay-bills.html')
+        homePage = new HomePage(page)
+        loginPage = new LoginPage(page)
+
+        homePage.visit()
+        homePage.clickOnSignIn()
+        loginPage.login('username', 'password')
     })
 
     test("Purchase Foreign Currency", async ({ page }) => {
+        await page.click('#online-banking')
+        await page.click('#pay_bills_link')
         await page.click('a[href="#ui-tabs-3"]')
         await page.selectOption("#pc_currency", "EUR")
 
