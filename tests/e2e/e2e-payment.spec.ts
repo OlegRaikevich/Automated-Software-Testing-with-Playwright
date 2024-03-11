@@ -1,13 +1,23 @@
 import { test, expect } from "@playwright/test"
-import { login } from "../../helpers"
+import { LoginPage } from '../../page-objects/LoginPage'
+import { HomePage } from '../../page-objects/HomePage'
 
 test.describe("Payment", () => {
+    let homePage: HomePage
+    let loginPage: LoginPage
+
     test.beforeEach(async ({ page }) => {
-        await login(page)
-        await page.goto('http://zero.webappsecurity.com/bank/pay-bills.html')
+        homePage = new HomePage(page)
+        loginPage = new LoginPage(page)
+
+        homePage.visit()
+        homePage.clickOnSignIn()
+        loginPage.login('username', 'password')
     })
 
     test("New payment", async ({ page }) => {
+        await page.click('#online-banking')
+        await page.click('#pay_bills_link')
         await page.selectOption("#sp_payee", 'apple')
         await page.click('#sp_get_payee_details')
         await page.waitForSelector('#sp_payee_details')
