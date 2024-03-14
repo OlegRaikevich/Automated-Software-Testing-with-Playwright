@@ -21,7 +21,7 @@ export class HomePage {
         await this.signInButton.click()
     }
 
-    async clickOnFeedbackLink(){
+    async clickOnFeedbackLink() {
         await this.linkFeedbackTab.click()
     }
 
