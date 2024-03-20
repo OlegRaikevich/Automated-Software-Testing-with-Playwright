@@ -11,7 +11,7 @@ test.describe("Feedback Form", () => {
         feedbackPage = new FeedbackPage(page)
         homePage = new HomePage(page)
 
-        await homePage.visit()
+        await homePage.visitHomePage()
         await homePage.clickOnFeedbackLink()
     })
 

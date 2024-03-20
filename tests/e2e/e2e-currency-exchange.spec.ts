@@ -10,13 +10,13 @@ test.describe("Currency Exchange", () => {
         homePage = new HomePage(page)
         loginPage = new LoginPage(page)
 
-        homePage.visit()
+        homePage.visitHomePage()
         homePage.clickOnSignIn()
         loginPage.login('username', 'password')
     })
 
     test("Purchase Foreign Currency", async ({ page }) => {
-        await page.click('#online-banking')
+        await homePage.clickOnOnlineBankingLink()
         await page.click('#pay_bills_link')
         await page.click('a[href="#ui-tabs-3"]')
         await page.selectOption("#pc_currency", "EUR")

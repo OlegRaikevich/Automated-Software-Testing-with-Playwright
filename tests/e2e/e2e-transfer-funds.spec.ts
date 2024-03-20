@@ -10,7 +10,7 @@ test.describe("Transfer Funds", () => {
         homePage = new HomePage(page)
         loginPage = new LoginPage(page)
 
-        homePage.visit()
+        homePage.visitHomePage()
         homePage.clickOnSignIn()
         loginPage.login('username', 'password')
     })
