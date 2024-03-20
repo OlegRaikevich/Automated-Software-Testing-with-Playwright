@@ -6,7 +6,7 @@ test.describe('Search Result', () => {
     test("Should find search results", async ({ page }) => {
         let homePage: HomePage = new HomePage(page)
 
-        await homePage.visit()
+        await homePage.visitHomePage()
         await homePage.searchFor('bank')
 
         const numberOfLinks = await page.locator('li > a')

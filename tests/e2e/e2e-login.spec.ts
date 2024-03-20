@@ -10,7 +10,7 @@ test.describe.parallel("Login / Logout Flow", () => {
         loginPage = new LoginPage(page)
         homePage = new HomePage(page)
 
-        await homePage.visit()
+        await homePage.visitHomePage()
     })
 
     test('Negative Scenario for Login', async ({ page }) => {
