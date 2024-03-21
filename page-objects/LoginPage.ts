@@ -6,6 +6,7 @@ export class LoginPage {
     readonly passwordInput: Locator
     readonly submitButton: Locator
     readonly errorMessage: Locator
+    readonly loginForm: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -13,6 +14,7 @@ export class LoginPage {
         this.passwordInput = page.locator('#user_password')
         this.submitButton = page.locator('text=Sign in')
         this.errorMessage = page.locator('.alert-error')
+        this.loginForm = page.locator('#login_form')
     }
 
     async login(username: string, password: string) {
@@ -20,12 +22,19 @@ export class LoginPage {
         await this.passwordInput.type(password)
         await this.submitButton.click()
         await this.page.goBack()
-        await this.page.waitForURL("http://zero.webappsecurity.com")
     }
 
     async assertErrorMessage() {
         await expect(this.errorMessage).toContainText(
             'Login and/or password are wrong.'
         )
+    }
+
+    async snapshotLoginForm() {
+        expect(await this.loginForm.screenshot()).toMatchSnapshot('login-form.png')
+    }
+
+    async snapshotErrorMessage() {
+        expect(await this.loginForm.screenshot()).toMatchSnapshot("login-error.png")
     }
 }
