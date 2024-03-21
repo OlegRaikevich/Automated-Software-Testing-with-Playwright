@@ -13,6 +13,7 @@ test.describe.parallel("Filter Transactions", () => {
         homePage.visitHomePage()
         homePage.clickOnSignIn()
         loginPage.login('username', 'password')
+        await page.waitForURL("http://zero.webappsecurity.com")
     })
 
     test("Transactions Savings account", async ({ page }) => {
