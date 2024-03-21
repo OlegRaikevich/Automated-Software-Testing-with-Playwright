@@ -23,6 +23,7 @@ test.describe("Payment", () => {
         homePage.visitHomePage()
         homePage.clickOnSignIn()
         loginPage.login('username', 'password')
+        await page.waitForURL("http://zero.webappsecurity.com")
     })
 
     test("New payment", async ({ page }) => {
