@@ -1,14 +1,12 @@
 import { expect, Locator, Page } from "@playwright/test"
 
 export class LoginPage {
-    // Define selectors
     readonly page: Page
     readonly usernameInput: Locator
     readonly passwordInput: Locator
     readonly submitButton: Locator
     readonly errorMessage: Locator
 
-    // Init selectors using constructor
     constructor(page: Page) {
         this.page = page
         this.usernameInput = page.locator('#user_login')
@@ -22,6 +20,7 @@ export class LoginPage {
         await this.passwordInput.type(password)
         await this.submitButton.click()
         await this.page.goBack()
+        await this.page.waitForURL("http://zero.webappsecurity.com")
     }
 
     async assertErrorMessage() {

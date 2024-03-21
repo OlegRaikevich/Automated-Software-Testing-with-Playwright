@@ -26,7 +26,7 @@ export class PaymentPage {
     }
 
     async createPyment() {
-        await this.paySelectBox.selectOption('apple')
+        await this.paySelectBox.selectOption("apple")
         await this.payDetailButton.click()
         await expect(this.payDetail).toBeVisible()
         await this.accountSelectBox.selectOption('6')
