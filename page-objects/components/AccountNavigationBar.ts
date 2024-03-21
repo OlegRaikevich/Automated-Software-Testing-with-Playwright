@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test"
 
-export class Navbar {
+export class AccountNavigationBar {
     readonly page: Page
     readonly accountSummary: Locator
     readonly accountActivity: Locator
