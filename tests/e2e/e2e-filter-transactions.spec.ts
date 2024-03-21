@@ -1,13 +1,22 @@
 import { test, expect } from "@playwright/test"
-import { login } from "../../helpers"
+import { LoginPage } from "../../page-objects/LoginPage"
+import { HomePage } from "../../page-objects/HomePage"
 
 test.describe.parallel("Filter Transactions", () => {
+    let homePage: HomePage
+    let loginPage: LoginPage
+
     test.beforeEach(async ({ page }) => {
-        await login(page)
-        await page.goto('http://zero.webappsecurity.com/bank/account-activity.html')
+        homePage = new HomePage(page)
+        loginPage = new LoginPage(page)
+
+        homePage.visitHomePage()
+        homePage.clickOnSignIn()
+        loginPage.login('username', 'password')
     })
 
     test("Transactions Savings account", async ({ page }) => {
+        await homePage.clickOnAccountActivityLink()
         await page.selectOption("#aa_accountId", "1")
 
         const tableRowDate = page.locator("#all_transactions_for_account thead th:nth-child(1)")
@@ -25,6 +34,7 @@ test.describe.parallel("Filter Transactions", () => {
     })
 
     test("Transactions Checking account", async ({ page }) => {
+        await homePage.clickOnAccountActivityLink()
         await page.selectOption("#aa_accountId", "2")
 
         const tableRowDate = page.locator("#all_transactions_for_account thead th:nth-child(1)")
@@ -42,6 +52,7 @@ test.describe.parallel("Filter Transactions", () => {
     })
 
     test("Transactions Loan account", async ({ page }) => {
+        await homePage.clickOnAccountActivityLink()
         await page.selectOption("#aa_accountId", "4")
 
         const tableRowDate = page.locator("#all_transactions_for_account thead th:nth-child(1)")
@@ -59,6 +70,7 @@ test.describe.parallel("Filter Transactions", () => {
     })
 
     test("Transactions Creadit Card account", async ({ page }) => {
+        await homePage.clickOnAccountActivityLink()
         await page.selectOption("#aa_accountId", "5")
 
         const noResults = page.locator("div.well")
@@ -67,6 +79,7 @@ test.describe.parallel("Filter Transactions", () => {
     })
 
     test("Transactions Brokerage account", async ({ page }) => {
+        await homePage.clickOnAccountActivityLink()
         await page.selectOption("#aa_accountId", "6")
 
         const noResults = page.locator("div.well")
