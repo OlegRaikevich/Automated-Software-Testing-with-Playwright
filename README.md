@@ -56,6 +56,7 @@ npm run tests:e2e - run e2e tests in Chrome browser
 npm run tests:visual:chrome - run visual tests in Chrome browser
 npm run tests:visual:firefox - run visual tests in Firefox browser
 npm run tests:visual:webkit - run visual tests in Safari browser
+npm run tests:api - run api tests
 ```
 
 ## Test Structure
