@@ -48,34 +48,14 @@ npm test
 
 This command will execute all tests defined in the test suite.
 But if you want to run a specific set of tests, such as UI, visual tests, or API tests you can use the following commands:
-
-Run all tests in Chrome browser
 ```bash
-npm run tests:chrome
-```
-Run all tests in Firefox browser
-```bash
-npm run tests:firefox
-```
-Run all tests in Safari browser
-```bash
-npm run tests:webkit
-```
-Run e2e tests in Chrome browser
-```bash
-npm run tests:e2e
-```
-Run visual tests in Chrome browser
-```bash
-npm run tests:visual:chrome
-```
-Run visual tests in Firefox browser
-```bash
-npm run tests:visual:firefox
-```
-Run visual tests in Safari browser
-```bash
-npm run tests:visual:webkit
+npm run tests:chrome - run all tests in Chrome browser
+npm run tests:firefox - run all tests in Firefox browser
+npm run tests:webkit - run all tests in Safari browser
+npm run tests:e2e - run e2e tests in Chrome browser
+npm run tests:visual:chrome - run visual tests in Chrome browser
+npm run tests:visual:firefox - run visual tests in Firefox browser
+npm run tests:visual:webkit - run visual tests in Safari browser
 ```
 
 ## Test Structure
