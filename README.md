@@ -2,7 +2,7 @@
 
 ## Introduction
 Welcome to the documentation for the automation tests developed using Playwright. This document provides an overview of the test suite, instructions for running the tests, and guidelines for interpreting the results.
-It is education project about automation testing with Playwright. All tests in this project are written to test the ZeroBanking platform.
+It is educational project about automation testing with Playwright. All tests in this project are written to test the ZeroBanking platform.
 
 ## Table of Contents
 
