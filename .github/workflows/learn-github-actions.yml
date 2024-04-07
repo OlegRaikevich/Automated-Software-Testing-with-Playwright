@@ -3,7 +3,7 @@ run-name: Run Playwright tests
 on: [push]
 jobs:
   set-up:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
