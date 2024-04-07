@@ -1,8 +1,7 @@
 # Automated-Software-Testing-with-Playwright
 
 ## Introduction
-Welcome to the documentation for the automation tests developed using Playwright. This document provides an overview of the test suite, instructions for running the tests, and guidelines for interpreting the results.
-It is education project about automation testing with Playwright. All tests in this project are written to test the ZeroBanking platform.
+Welcome to the documentation for the automation tests developed using Playwright. This document provides an overview of the test suite, instructions for running the tests, and guidelines for interpreting the results. UI tests in this project are written for the ZeroBanking platform, accessible at http://zero.webappsecurity.com/index.html, and API tests are written for the Reqres platform, available at https://reqres.in.
 
 ## Table of Contents
 
@@ -56,6 +55,7 @@ npm run tests:e2e - run e2e tests in Chrome browser
 npm run tests:visual:chrome - run visual tests in Chrome browser
 npm run tests:visual:firefox - run visual tests in Firefox browser
 npm run tests:visual:webkit - run visual tests in Safari browser
+npm run tests:api - run api tests
 ```
 
 ## Test Structure
