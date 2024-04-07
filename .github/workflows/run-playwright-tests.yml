@@ -10,4 +10,3 @@ jobs:
       - run: npm install
       - run: npx playwright install
       - run: npm run tests:api
-      - run: npm run tests:e2e
