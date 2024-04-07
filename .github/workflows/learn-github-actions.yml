@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npx playwright install
       - run: npm install
+      - run: npx playwright install
       - run: npm run tests:api
       - run: npm run tests:e2e
