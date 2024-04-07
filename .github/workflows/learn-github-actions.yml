@@ -12,3 +12,4 @@ jobs:
           node-version: '20'
       - run: npm install
       - run: npm run tests:api
+      - run: npm run tests:e2e
