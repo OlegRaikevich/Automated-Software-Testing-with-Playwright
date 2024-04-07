@@ -11,7 +11,7 @@
     "tests:visual:chrome": "playwright test --config=visual.config.ts --project=Chromium",
     "tests:visual:firefox": "playwright test --config=visual.config.ts --project=Firefox",
     "tests:visual:webkit": "playwright test --config=visual.config.ts --project=Webkit",
-    "tests:api": "playwright test --config=api.config.ts --project=Chromium"
+    "tests:api": "playwright test --config=api.config.ts --project=Chromium --reporter=list"
   },
   "author": "Oleg Raikevich",
   "license": "ISC",
