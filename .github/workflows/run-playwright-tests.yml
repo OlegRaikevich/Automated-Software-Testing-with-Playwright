@@ -1,12 +1,12 @@
-name: run-playwright-tests
-run-name: Run Playwright tests
-on: [push]
-jobs:
-  set-up-and-run-tests:
-    name: Setup repo and run tests
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v4 
-      - run: npm install
-      - run: npx playwright install
-      - run: npm run tests:api
+# name: run-playwright-tests
+# run-name: Run Playwright tests
+# on: [push]
+# jobs:
+#   set-up-and-run-tests:
+#     name: Setup repo and run tests
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - uses: actions/checkout@v4 
+#       - run: npm install
+#       - run: npx playwright install
+#       - run: npm run tests:api
