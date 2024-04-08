@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test"
-import { HomePage } from "../../page-objects/HomePage"
-import { LoginPage } from "../../page-objects/LoginPage"
+import { HomePage } from "../../../page-objects/zerobank/HomePage"
+import { LoginPage } from "../../../page-objects/zerobank/LoginPage"
 
 test.describe("Transfer Funds", () => {
     let homePage: HomePage

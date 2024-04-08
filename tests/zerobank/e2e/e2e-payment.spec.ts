@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test"
-import { LoginPage } from '../../page-objects/LoginPage'
-import { HomePage } from '../../page-objects/HomePage'
-import { PaymentPage } from "../../page-objects/PaymentPage"
-import { AccountNavigationBar } from "../../page-objects/components/AccountNavigationBar"
-import { OnlineBankingPage } from "../../page-objects/OnlineBankingPage"
+import { HomePage } from "../../../page-objects/zerobank/HomePage"
+import { LoginPage } from "../../../page-objects/zerobank/LoginPage"
+import { PaymentPage } from "../../../page-objects/zerobank/PaymentPage"
+import { AccountNavigationBar } from "../../../page-objects/zerobank/components/AccountNavigationBar"
+import { OnlineBankingPage } from "../../../page-objects/zerobank/OnlineBankingPage"
 
 test.describe("Payment", () => {
     let homePage: HomePage

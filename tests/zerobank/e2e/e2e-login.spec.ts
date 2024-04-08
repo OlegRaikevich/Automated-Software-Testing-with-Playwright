@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../../page-objects/LoginPage'
-import { HomePage } from '../../page-objects/HomePage'
+import { LoginPage } from '../../../page-objects/zerobank/LoginPage'
+import { HomePage } from '../../../page-objects/zerobank/HomePage'
 
 test.describe.parallel("Login / Logout Flow", () => {
     let loginPage: LoginPage
@@ -18,7 +18,7 @@ test.describe.parallel("Login / Logout Flow", () => {
         await loginPage.login('invalid username', 'invalid password')
         await loginPage.assertErrorMessage()
     })
-    
+
     test('Positive Scenario for Login + Logout', async ({ page }) => {
         await homePage.clickOnSignIn()
         await loginPage.login('username', 'password')
