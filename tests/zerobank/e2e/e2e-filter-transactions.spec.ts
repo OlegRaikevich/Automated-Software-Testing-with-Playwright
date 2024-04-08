@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test"
-import { LoginPage } from "../../page-objects/LoginPage"
-import { HomePage } from "../../page-objects/HomePage"
+import { LoginPage } from "../../../page-objects/zerobank/LoginPage"
+import { HomePage } from "../../../page-objects/zerobank/HomePage"
 
 test.describe.parallel("Filter Transactions", () => {
     let homePage: HomePage
