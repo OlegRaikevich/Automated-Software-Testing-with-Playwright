@@ -5,12 +5,14 @@ export class MainPage {
     readonly signInButton: Locator
     readonly userLabelButton: Locator
     readonly usernameLabel: Locator
+    readonly homeLabel: Locator
 
     constructor(page: Page) {
         this.page = page
         this.signInButton = page.locator('.HeaderMenu-link--sign-in')
-        this.userLabelButton = page.locator('#dialog-show-dialog-606cd4d5-a13c-4d3b-879b-c1666db06aec')
+        this.userLabelButton = page.locator("span[class='Button-label'] img[class='avatar circle']")
         this.usernameLabel = page.locator("span[class='Truncate text-bold'] span[class='Truncate-text']")
+        this.homeLabel = page.locator("h2[data-target='feed-container.feedTitle']")
 
         // Todo: rewrite user panel on main page it is like as component
     }

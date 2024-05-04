@@ -9,6 +9,7 @@ test.describe("Login Github", () => {
 
     test.beforeEach(async ({ page }) => {
         mainPage = new MainPage(page)
+        loginPage = new LoginPage(page)
 
         await mainPage.visitMainPage()
     })
@@ -19,5 +20,11 @@ test.describe("Login Github", () => {
         await loginPage.assertLoginSuccess()
         await mainPage.clickUserLabelButton()
         await mainPage.assertUsernameLabel()
+    })
+
+    test("Negative scenario for login", async ({ page }) => {
+        await mainPage.clickOnSignInBotton()
+        await loginPage.login('invalid_usename', 'invalid_password')
+        await loginPage.assertLoginErrorAllert()
     })
 })
