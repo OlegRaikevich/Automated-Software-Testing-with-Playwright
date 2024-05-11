@@ -1,18 +1,29 @@
-import { test, expect, request } from "@playwright/test"
+import { test, expect, request } from "@playwright/test";
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats'
+import schema_single_user from './schemas/single-user.json'
+import schema_create_user from './schemas/create-user.json'
+import schema_login from './schemas/login.json'
+import schema_register_success from './schemas/register-success.json'
+import schema_register_fail from './schemas/register-failed.json'
+import schema_update_user from './schemas/update-user.json'
+// todo: reduce imports for json schemas
+
 
 test.describe.parallel('API testing', () => {
     const baseUrl = 'https://reqres.in/api'
+    const ajv = new Ajv()
+    addFormats(ajv)
 
     test("GET Request - Get User Detail", async ({ request }) => {
         const response = await request.get(`${baseUrl}/users/1`)
-        const responseBody = JSON.parse(await response.text())
-
         expect(response.status()).toBe(200)
-        expect(responseBody.data.id).toBe(1)
-        expect(responseBody.data.first_name).toBeTruthy
-        expect(responseBody.data.last_name).toBeTruthy
-        expect(responseBody.data.email).toBeTruthy
-        expect(responseBody.data.avatar).toHaveURL
+
+        const body = JSON.parse(await response.body())
+        const validate = ajv.compile(schema_single_user)
+        const valid = validate(body)
+
+        expect(valid).toBe(true)
     })
 
     test('GET Request - Assert Invalid Endpoint', async ({ request }) => {
@@ -28,12 +39,13 @@ test.describe.parallel('API testing', () => {
                 job: "Scientist",
             },
         })
-        const responseBody = JSON.parse(await response.text())
         expect(response.status()).toBe(201)
-        expect(responseBody.id).toBe(100)
-        expect(responseBody.name).toBe("Dennis")
-        expect(responseBody.job).toBe("Scientist")
-        expect(responseBody.createdAt).toBeTruthy()
+
+        const body = JSON.parse(await response.body())
+        const validate = ajv.compile(schema_create_user)
+        const valid = validate(body)
+
+        expect(valid).toBe(true)
     })
 
     test("POST Request - Login - Successful", async ({ request }) => {
@@ -43,9 +55,13 @@ test.describe.parallel('API testing', () => {
                 "password": "cityslicka"
             },
         })
-        const responseBody = JSON.parse(await response.text())
         expect(response.status()).toBe(200)
-        expect(responseBody.token).toBeTruthy()
+
+        const body = JSON.parse(await response.body())
+        const validate = ajv.compile(schema_login)
+        const valid = validate(body)
+
+        expect(valid).toBe(true)
     })
 
     test("POST Request - Login - Unsuccessful - Wrong User", async ({ request }) => {
@@ -55,9 +71,9 @@ test.describe.parallel('API testing', () => {
                 password: 'pas',
             },
         })
-        const responseBody = JSON.parse(await response.text())
+        const body = JSON.parse(await response.body())
         expect(response.status()).toBe(400)
-        expect(responseBody.error).toBe("user not found")
+        expect(body.error).toBe("user not found")
     })
 
     test("POST Request - Login - Unsuccessful - Missing Password", async ({ request }) => {
@@ -66,9 +82,9 @@ test.describe.parallel('API testing', () => {
                 email: 'mister.twister@reqres.in'
             },
         })
-        const responseBody = JSON.parse(await response.text())
+        const body = JSON.parse(await response.body())
         expect(response.status()).toBe(400)
-        expect(responseBody.error).toBe("Missing password")
+        expect(body.error).toBe("Missing password")
     })
 
     test("POST Request - Register - Successful", async ({ request }) => {
@@ -78,10 +94,13 @@ test.describe.parallel('API testing', () => {
                 "password": "pistol"
             }
         })
-        const responseBody = JSON.parse(await response.text())
         expect(response.status()).toBe(200)
-        expect(responseBody.id).toBeTruthy()
-        expect(responseBody.token).toBeTruthy()
+
+        const body = JSON.parse(await response.body())
+        const validate = ajv.compile(schema_register_success)
+        const valid = validate(body)
+
+        expect(valid).toBe(true)
     })
 
     test("POST Request - Register - Unsuccessful", async ({ request }) => {
@@ -90,9 +109,13 @@ test.describe.parallel('API testing', () => {
                 "email": "sydney@fife",
             }
         })
-        const responseBody = JSON.parse(await response.text())
         expect(response.status()).toBe(400)
-        expect(responseBody.error).toBe("Missing password")
+
+        const body = JSON.parse(await response.body())
+        const validate = ajv.compile(schema_register_fail)
+        const valid = validate(body)
+
+        expect(valid).toBe(true)
     })
 
     test("PUT Request - Update User", async ({ request }) => {
@@ -102,11 +125,13 @@ test.describe.parallel('API testing', () => {
                 job: "new job",
             },
         })
-        const responseBody = JSON.parse(await response.text())
         expect(response.status()).toBe(200)
-        expect(responseBody.name).toBe('new name')
-        expect(responseBody.job).toBe('new job')
-        expect(responseBody.updatedAt).toBeTruthy()
+
+        const body = JSON.parse(await response.body())
+        const validate = ajv.compile(schema_update_user)
+        const valid = validate(body)
+
+        expect(valid).toBe(true)
     })
 
     test("DELETE Request - Delete User", async ({ request }) => {
