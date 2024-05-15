@@ -10,10 +10,10 @@ export class NewRepositoryPage {
 
     constructor(page: Page) {
         this.page = page
-        this.repositoryNameInput = page.locator('#\:r7\:')
-        this.repositoryOwnerButton = page.locator('#\:r5\:')
-        this.repositoryOwnerSelection = page.locator('#\:r1c\:')
-        this.repositoryDescriptionInput = page.locator('#\:r8\:')
+        this.repositoryNameInput = page.locator('input[data-testid="repository-name-input"]')
+        this.repositoryOwnerButton = page.locator('button[aria-describedby="repo-owner-dropdown-error"]')
+        this.repositoryOwnerSelection = page.locator('li[role="menuitemradio"]')
+        this.repositoryDescriptionInput = page.locator('input[aria-label="Description"]')
         this.createRepositoryButton = page.locator("//span[contains(text(),'Create repository')]")
     }
 

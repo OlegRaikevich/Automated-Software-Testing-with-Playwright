@@ -10,7 +10,7 @@ export class LoginPage {
     constructor(page: Page) {
         this.page = page
         this.UserNameInput = page.locator('#login_field')
-        this.PasswordInput = page.locator('#password')
+        this.PasswordInput = page.locator('input#password')
         this.SignInButton = page.locator('.js-sign-in-button')
         this.loginAllert = page.locator('.js-flash-alert')
     }
