@@ -18,7 +18,7 @@ export class UserPanel {
         // todo: add other locator
         this.yourProfileButton = page.locator('a[data-analytics-event="{"action":"PROFILE"}"] span[class="ActionListItem-label"]')
         this.addAccountButton = page.locator('a[data-analytics-event="{"action":"Add account"}"] span[class="ActionListItem-label"]')
-        this.yourRepositoriesButton = page.locator('a[data-analytics-event="{"action":"YOUR_REPOSITORIES"}"] span[class="ActionListItem-label"]')
+        this.yourRepositoriesButton = page.locator("//span[contains(text(),'Your repositories')]")
         this.signOutButton = page.locator('a[class="ActionListContent"] span[class="ActionListItem-label"]')
     }
 
