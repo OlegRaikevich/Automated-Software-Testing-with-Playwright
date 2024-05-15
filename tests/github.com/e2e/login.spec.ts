@@ -1,15 +1,19 @@
 import { expect, test } from "@playwright/test"
 import { MainPage } from "../../../page-objects/github.com/MainPage"
 import { LoginPage } from "../../../page-objects/github.com/LoginPage"
+import { UserPanel } from "../../../page-objects/github.com/components/UserPanel"
 import { credentials } from "../../../credentials.json"
 
-test.describe("Login Github", () => {
+test.describe.only("Login Github", () => {
     let mainPage: MainPage
     let loginPage: LoginPage
+    let userPanel: UserPanel
 
     test.beforeEach(async ({ page }) => {
         mainPage = new MainPage(page)
         loginPage = new LoginPage(page)
+        userPanel = new UserPanel(page)
+
 
         await mainPage.visitMainPage()
     })
@@ -18,8 +22,8 @@ test.describe("Login Github", () => {
         await mainPage.clickOnSignInBotton()
         await loginPage.login(credentials.username, credentials.password)
         await loginPage.assertLoginSuccess()
-        await mainPage.clickUserLabelButton()
-        await mainPage.assertUsernameLabel()
+        await userPanel.clickOnButton('User label')
+        await userPanel.assertUsernameLabel()
     })
 
     test("Negative scenario for login", async ({ page }) => {
