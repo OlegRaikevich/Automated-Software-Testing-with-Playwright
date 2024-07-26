@@ -5,6 +5,14 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      script:
+        description: 'Npm script which contain list of tests'
+        required: true
+        default: "tests:api"
+        type: choice
+        options:
+        - "github:tests:e2e"
 jobs:
   test:
     timeout-minutes: 5
@@ -23,7 +31,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npm run tests:api
+      run: npm run ${{ inputs.script }}
       env:
         USER_LOGIN: ${{ secrets.TEST_USER_LOGIN}}
         USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
