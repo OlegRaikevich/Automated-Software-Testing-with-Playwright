@@ -12,6 +12,7 @@ on:
         default: "tests:api"
         type: choice
         options:
+        - "tests:api"
         - "github:tests:e2e"
 jobs:
   test:
