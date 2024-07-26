@@ -7,9 +7,6 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch name'
-        required: true
-        default: 'main'
 jobs:
   test:
     timeout-minutes: 5
