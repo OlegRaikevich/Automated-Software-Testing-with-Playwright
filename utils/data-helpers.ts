@@ -1,10 +1,9 @@
 const crypto = require('crypto')
 
-export async function getRandomNumber() {
+export function getRandomNumber(): number {
     return Math.floor(Math.random() * 1000 + 1)
 }
 
-export async function getRandomString(){
+export function getRandomString(): string{
     return crypto.randomBytes(20).toString('hex')
-    
 }
