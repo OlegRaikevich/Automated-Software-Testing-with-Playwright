@@ -13,7 +13,7 @@ export class UserPanel {
     constructor(page: Page) {
         this.page = page
         this.usernameLabel = page.locator("span[class='Truncate text-bold'] span[class='Truncate-text']")
-        this.userLabelButton = page.locator(".header-nav-current-user .avatar")
+        this.userLabelButton = page.locator("/html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/deferred-side-panel[1]/include-fragment[1]/button[1]")
         this.setStatusButton = page.locator(".ActionListItem-label.ActionListItem-label--truncate")
         // todo: add other locator
         this.yourProfileButton = page.locator('a[data-analytics-event="{"action":"PROFILE"}"] span[class="ActionListItem-label"]')
