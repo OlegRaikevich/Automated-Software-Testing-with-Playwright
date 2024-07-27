@@ -33,7 +33,7 @@ export class LoginPage {
     }
 
     async assertLoginSuccess() {
-        await expect(this.page).toHaveURL("https://github.com/")
+        await expect(this.page).toHaveURL("https://github.com/session")
     }
 
 }
