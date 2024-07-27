@@ -31,7 +31,7 @@ test.describe("Create repository", () => {
 
         await mainPage.visitMainPage()
         await mainPage.clickOnSignInBotton()
-        await loginPage.login(process.env.USER_, process.env.USER_PASSWORD)
+        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
     })
 
     test.only("Positive scenario for creating repository", async ({ page }) => {
