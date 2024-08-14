@@ -5,6 +5,7 @@ import { RepositoriesPage } from "../../../page-objects/github.com/RepositoriesP
 import { LoginPage } from "../../../page-objects/github.com/LoginPage"
 import { NewRepositoryPage } from "../../../page-objects/github.com/NewRepositoryPage"
 import { UserPanel } from "../../../page-objects/github.com/components/UserPanel"
+import { getRandomString, getRandomNumber } from "../../../utils/data-helpers"
 
 test.describe("Create repository", () => {
     let mainPage: MainPage
@@ -14,6 +15,9 @@ test.describe("Create repository", () => {
     let newRepositoryPage: NewRepositoryPage
     let userPanel: UserPanel
 
+    let repoName: string
+    let repoDescription: string
+
     test.beforeEach(async ({ page }) => {
         mainPage = new MainPage(page)
         navigationBar = new NavigationBar(page)
@@ -22,20 +26,32 @@ test.describe("Create repository", () => {
         userPanel = new UserPanel(page)
         newRepositoryPage = new NewRepositoryPage(page)
 
+        repoName = "RepoName" + String(getRandomNumber())
+        repoDescription = "RepositoryDescription" + getRandomString()
+
         await mainPage.visitMainPage()
         await mainPage.clickOnSignInBotton()
-        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD )
+        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
     })
 
-    test("Positive scenario for creating repository", async ({ page }) => {
+    test.only("Positive scenario for creating repository", async ({ page }) => {
         await userPanel.clickOnButton('User label')
         await userPanel.clickOnButton('Your repositories')
         await repositoriesPage.clickOnNewRepositoryButton()
-        await newRepositoryPage.createRepository('test-repo', 'test repository')
+
+        await newRepositoryPage.createRepository(repoName, repoDescription)
 
         const repositoryTitle = await page.locator("//a[contains(text(),'test-repo')]")
         await expect(repositoryTitle).toBeVisible()
         const setupInstructionBox = await page.locator("//body/div[1]/div[6]/div[1]/main[1]/turbo-frame[1]/div[1]/div[1]/git-clone-help[1]/div[1]")
         await expect(setupInstructionBox).toBeVisible()
     })
+
+    // test("Psitive scenario for deleting repository", async ({ page }) => {
+    //     await userPanel.clickOnButton('User label')
+    //     await userPanel.clickOnButton('Your repositories')
+    //     await repositoriesPage
+    // })
+
+
 })
