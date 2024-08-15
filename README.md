@@ -39,6 +39,8 @@ To install the necessary dependencies for running the tests, follow these steps:
 
 ## Running Tests
 
+The simplest way to run tests is to use GitHub Actions. To run tests, go to the "Actions" tab, choose the Playwright Tests workflow, and click on the "Run workflow" button. You can find the test report in the log of that workflow.
+
 To run the automation tests, execute the following command:
 
 ```bash
@@ -58,15 +60,54 @@ npm run tests:visual:webkit - run visual tests in Safari browser
 npm run tests:api - run api tests
 ```
 
-## Test Structure
 
-The test suite is organized into directories based on test scenarios and features. Within each directory, individual test files contain test cases for specific functionalities. The structure follows the Page Object Model (POM) design pattern to enhance test maintainability and readability.
+## Project Architecture
 
-## Test Reporting
+The project is structured to facilitate organized and maintainable test automation using Playwright. Below is an overview of the key components and their roles within the project:
 
-After executing the tests, a test report will be generated, providing details about test execution, including:
+### 1. **Directory Structure**
 
-- Number of tests executed
-- Passed, failed, and skipped tests
-- Execution time for each test case
-- Any errors or exceptions encountered during test execution
+- **`tests/`**: Contains all the test files.
+  - **`e2e/`**: End-to-end tests for the ZeroBanking platform.
+  - **`api/`**: API tests for the Reqres platform.
+- **`page-objects/`**: Page Object Model (POM) classes that encapsulate the UI elements and interactions for different pages.
+- **`utils/`**: Utility functions and helpers used across tests.
+- **`config/`**: Configuration files for different environments and test settings.
+- **`reports/`**: Generated test reports and logs.
+
+### 2. **Page Object Model (POM)**
+
+The Page Object Model is used to create an abstraction layer for UI interactions. Each page or component has a corresponding class in the `page-objects/` directory, which contains locators and methods to interact with the page elements.
+
+### 3. **Test Files**
+
+Test files are organized based on the type of tests:
+- **End-to-End (e2e) Tests**: Located in the `tests/e2e/` directory, these tests simulate user interactions with the ZeroBanking platform.
+- **API Tests**: Located in the `tests/api/` directory, these tests validate the RESTful endpoints of the Reqres platform.
+
+### 4. **Configuration**
+
+Configuration files in the `config/` directory define settings for different environments (e.g., development, staging, production). These settings include base URLs, timeouts, and other environment-specific parameters.
+
+### 5. **Utilities**
+
+The `utils/` directory contains helper functions and utilities that support the test execution. These may include functions for data generation, custom assertions, and common setup/teardown routines.
+
+### 6. **Continuous Integration (CI)**
+
+The project is integrated with GitHub Actions for continuous integration. The CI pipeline is defined in the `.github/workflows/` directory and includes steps for installing dependencies, running tests, and generating reports.
+
+### 7. **Test Reporting**
+
+Test results are captured and stored in the `reports/` directory. The reports include detailed logs, screenshots, and other artifacts that help in debugging and analyzing test outcomes.
+
+### 8. **Best Practices**
+
+The project follows best practices for test automation, including:
+- Using the Page Object Model to reduce code duplication and improve maintainability.
+- Organizing tests based on functionality and type.
+- Implementing retries and error handling to reduce test flakiness.
+- Running tests in parallel to optimize execution time.
+- Generating detailed reports for better visibility into test results.
+
+This architecture ensures that the test suite is scalable, maintainable, and easy to understand, providing robust quality assurance for the ZeroBanking and Reqres platforms.
