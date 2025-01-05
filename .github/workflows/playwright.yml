@@ -1,45 +1,48 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
     inputs:
       script:
-        description: 'Npm script which contain list of tests'
+        description: "Npm script which contain list of tests"
         required: true
         default: "github:tests:e2e"
         type: choice
         options:
-        - "github:tests:e2e"
-        
+          - "github:tests:e2e"
+
 jobs:
-  test:
-    timeout-minutes: 5
+  build-and-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 18
-  
-    - name: Install dependencies
-      run: npm ci
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Run Playwright tests
-      run: npm run ${{ inputs.script }}
-      env:
-        USER_LOGIN: ${{ secrets.TEST_USER_LOGIN}}
-        USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+      - name: Install Playwright
+        uses: microsoft/playwright-github-action@v1
+        with:
+          install-dependencies: true
 
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 3
+      - name: Run Playwright tests
+        run: npm run ${{ inputs.script }}
+        env:
+          USER_LOGIN: ${{ secrets.TEST_USER_LOGIN}}
+          USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 3
