@@ -9,15 +9,11 @@ on:
       script:
         description: 'Npm script which contain list of tests'
         required: true
-        default: "tests:api"
+        default: "github:tests:e2e"
         type: choice
         options:
-        - "tests:api"
         - "github:tests:e2e"
-        - "tests:chrome"
-        - "tests:firefox"
-        - "tests:webkit"
-        - "zerobanking:tests:e2e"
+        
 jobs:
   test:
     timeout-minutes: 5
