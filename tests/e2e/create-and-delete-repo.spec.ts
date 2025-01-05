@@ -5,7 +5,7 @@ import { RepositoriesPage } from "../../../page-objects/github.com/RepositoriesP
 import { LoginPage } from "../../../page-objects/github.com/LoginPage"
 import { NewRepositoryPage } from "../../../page-objects/github.com/NewRepositoryPage"
 import { UserPanel } from "../../../page-objects/github.com/components/UserPanel"
-import { getRandomString, getRandomNumber } from "../../../utils/data-helpers"
+import { getRandomString, getRandomNumber } from "../../utils/data-helpers"
 
 test.describe("Create repository", () => {
     let mainPage: MainPage
