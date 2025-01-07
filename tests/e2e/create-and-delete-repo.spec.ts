@@ -1,46 +1,30 @@
 import { expect, test } from "@playwright/test"
-import {getRandomString, getRandomNumber} from "../../utils/data-helpers"
-import { 
-    MainPage, 
-    LoginPage, 
-    NewRepositoryPage, 
-    RepositoriesPage, 
-    NavigationBar, 
-    UserPanel} from "../../page-objects"
+import { getRandomString, getRandomNumber } from "../../utils/data-helpers"
+import { PageObjectManager } from "../../page-objects/PageObjectManager"
 
 test.describe("Create repository", () => {
-    let mainPage: MainPage
-    let navigationBar: NavigationBar
-    let repositoriesPage: RepositoriesPage
-    let loginPage: LoginPage
-    let newRepositoryPage: NewRepositoryPage
-    let userPanel: UserPanel
+    let pageManager: PageObjectManager
 
     let repoName: string
     let repoDescription: string
 
     test.beforeEach(async ({ page }) => {
-        mainPage = new MainPage(page)
-        navigationBar = new NavigationBar(page)
-        repositoriesPage = new RepositoriesPage(page)
-        loginPage = new LoginPage(page)
-        userPanel = new UserPanel(page)
-        newRepositoryPage = new NewRepositoryPage(page)
+        pageManager = new PageObjectManager(page)
 
         repoName = "RepoName" + String(getRandomNumber())
         repoDescription = "RepositoryDescription" + getRandomString()
 
-        await mainPage.visitMainPage()
-        await mainPage.clickOnSignInBotton()
-        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
+        await pageManager.mainPage.visitMainPage()
+        await pageManager.mainPage.clickOnSignInBotton()
+        await pageManager.loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
     })
 
     test.only("Positive scenario for creating repository", async ({ page }) => {
-        await userPanel.clickOnButton('User label')
-        await userPanel.clickOnButton('Your repositories')
-        await repositoriesPage.clickOnNewRepositoryButton()
+        await pageManager.userPanel.clickOnButton('User label')
+        await pageManager.userPanel.clickOnButton('Your repositories')
+        await pageManager.repositoriesPage.clickOnNewRepositoryButton()
 
-        await newRepositoryPage.createRepository(repoName, repoDescription)
+        await pageManager.newRepositoryPage.createRepository(repoName, repoDescription)
 
         const repositoryTitle = await page.locator("//a[contains(text(),'test-repo')]")
         await expect(repositoryTitle).toBeVisible()

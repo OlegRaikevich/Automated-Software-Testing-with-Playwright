@@ -1,31 +1,27 @@
 import { expect, test } from "@playwright/test"
-import { MainPage, LoginPage, UserPanel } from "../../page-objects"
+import { PageObjectManager } from "../../page-objects/PageObjectManager"
 
 test.describe.only("Login Github", () => {
-    let mainPage: MainPage
-    let loginPage: LoginPage
-    let userPanel: UserPanel
+    let pageManager: PageObjectManager
 
     test.beforeEach(async ({ page }) => {
-        mainPage = new MainPage(page)
-        loginPage = new LoginPage(page)
-        userPanel = new UserPanel(page)
+        pageManager = new PageObjectManager(page)
 
 
-        await mainPage.visitMainPage()
+        await pageManager.mainPage.visitMainPage()
     })
 
     test("Positive scenario for login", async ({ page }) => {
-        await mainPage.clickOnSignInBotton()
-        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
-        await loginPage.assertLoginSuccess()
-        await userPanel.clickOnButton('User label')
-        await userPanel.assertUsernameLabel()
+        await pageManager.mainPage.clickOnSignInBotton()
+        await pageManager.loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
+        await pageManager.loginPage.assertLoginSuccess()
+        await pageManager.userPanel.clickOnButton('User label')
+        await pageManager.userPanel.assertUsernameLabel()
     })
 
     test("Negative scenario for login", async ({ page }) => {
-        await mainPage.clickOnSignInBotton()
-        await loginPage.login('invalid_usename', 'invalid_password')
-        await loginPage.assertLoginErrorAllert()
+        await pageManager.mainPage.clickOnSignInBotton()
+        await pageManager.loginPage.login('invalid_usename', 'invalid_password')
+        await pageManager.loginPage.assertLoginErrorAllert()
     })
 })
