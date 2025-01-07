@@ -1,7 +1,5 @@
 import { expect, test } from "@playwright/test"
-import { MainPage } from "../../../page-objects/github.com/MainPage"
-import { LoginPage } from "../../../page-objects/github.com/LoginPage"
-import { UserPanel } from "../../../page-objects/github.com/components/UserPanel"
+import { MainPage, LoginPage, UserPanel } from "../../page-objects"
 
 test.describe.only("Login Github", () => {
     let mainPage: MainPage
@@ -19,7 +17,7 @@ test.describe.only("Login Github", () => {
 
     test("Positive scenario for login", async ({ page }) => {
         await mainPage.clickOnSignInBotton()
-        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD )
+        await loginPage.login(process.env.USER_LOGIN, process.env.USER_PASSWORD)
         await loginPage.assertLoginSuccess()
         await userPanel.clickOnButton('User label')
         await userPanel.assertUsernameLabel()

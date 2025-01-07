@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test"
-import { MainPage } from "../../../page-objects/github.com/MainPage"
-import { NavigationBar } from "../../../page-objects/github.com/components/NavigationBar"
-import { RepositoriesPage } from "../../../page-objects/github.com/RepositoriesPage"
-import { LoginPage } from "../../../page-objects/github.com/LoginPage"
-import { NewRepositoryPage } from "../../../page-objects/github.com/NewRepositoryPage"
-import { UserPanel } from "../../../page-objects/github.com/components/UserPanel"
-import { getRandomString, getRandomNumber } from "../../utils/data-helpers"
+import {getRandomString, getRandomNumber} from "../../utils/data-helpers"
+import { 
+    MainPage, 
+    LoginPage, 
+    NewRepositoryPage, 
+    RepositoriesPage, 
+    NavigationBar, 
+    UserPanel} from "../../page-objects"
 
 test.describe("Create repository", () => {
     let mainPage: MainPage
