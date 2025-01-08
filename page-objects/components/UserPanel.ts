@@ -1,54 +1,29 @@
-import { expect, Locator, Page } from '@playwright/test'
+import { Locators } from "../../utils/locators"
+import { BasePage } from "../BasePage"
 
-export class UserPanel {
-    readonly page: Page
-    readonly userLabelButton: Locator
-    readonly usernameLabel: Locator
-    readonly setStatusButton: Locator
-    readonly yourProfileButton: Locator
-    readonly addAccountButton: Locator
-    readonly yourRepositoriesButton: Locator
-    readonly signOutButton: Locator
-
-    constructor(page: Page) {
-        this.page = page
-        this.usernameLabel = page.locator("span[class='Truncate text-bold'] span[class='Truncate-text']")
-        this.userLabelButton = page.locator('button[aria-label="Open user navigation menu"]')
-        
-        this.setStatusButton = page.locator(".ActionListItem-label.ActionListItem-label--truncate")
-        // todo: add other locator
-        this.yourProfileButton = page.locator('a[data-analytics-event="{"action":"PROFILE"}"] span[class="ActionListItem-label"]')
-        this.addAccountButton = page.locator('a[data-analytics-event="{"action":"Add account"}"] span[class="ActionListItem-label"]')
-        this.yourRepositoriesButton = page.locator("//span[contains(text(),'Your repositories')]")
-        this.signOutButton = page.locator('a[class="ActionListContent"] span[class="ActionListItem-label"]')
-    }
-
+export class UserPanel extends BasePage {
     async clickOnButton(buttonName: string) {
         switch (buttonName) {
             case 'User label':
-                await this.userLabelButton.click()
+                await this.click(Locators.userPanel.userLabelButton)
                 break
             case 'Set status':
-                await this.setStatusButton.click()
+                await this.click(Locators.userPanel.setStatusButton)
                 break
             case 'Your profile':
-                await this.yourProfileButton.click()
+                await this.click(Locators.userPanel.yourProfileButton)
                 break
             case 'Add account':
-                await this.addAccountButton.click()
+                await this.click(Locators.userPanel.addAccountButton)
                 break
             case 'Your repositories':
-                await this.yourRepositoriesButton.click()
+                await this.click(Locators.userPanel.yourRepositoriesButton)
                 break
             case 'Sign out':
-                await this.signOutButton.click()
+                await this.click(Locators.userPanel.signOutButton)
                 break
             default:
                 throw new Error('This button does not exist.')
         }
-    }
-
-    async assertUsernameLabel() {
-        await expect(this.usernameLabel).toBeVisible()
     }
 }

@@ -1,25 +1,16 @@
-import { expect, Locator, Page } from "@playwright/test"
+import { Locators } from "../utils/locators"
+import { BasePage } from "./BasePage"
 
-export class MainPage {
-    readonly page: Page
-    readonly signInButton: Locator
-    readonly homeLabel: Locator
-
-    constructor(page: Page) {
-        this.page = page
-        this.signInButton = page.locator('.HeaderMenu-link--sign-in')
-        this.homeLabel = page.locator("h2[data-target='feed-container.feedTitle']")
-    }
-
+export class MainPage extends BasePage {
     async visitMainPage() {
         await this.page.goto('https://github.com/')
     }
 
     async clickOnSignInBotton() {
-        await this.signInButton.click()
+        await this.click(Locators.mainPage.signInButton)
     }
 
     async clickOnHomeLabel() {
-        await this.homeLabel.click()
+        await this.click(Locators.mainPage.homeLabel)
     }
 }

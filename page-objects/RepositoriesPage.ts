@@ -1,16 +1,8 @@
-import { expect, Locator, Page } from "@playwright/test"
+import { Locators } from "../utils/locators"
+import { BasePage } from "./BasePage"
 
-export class RepositoriesPage {
-    readonly page: Page
-    readonly newRepositoryButton: Locator
-    readonly existingRepositoryName: Locator
-
-    constructor(page: Page) {
-        this.page = page
-        this.newRepositoryButton = page.locator('.text-center.btn.btn-primary.ml-2')
-    }
-
+export class RepositoriesPage extends BasePage {
     async clickOnNewRepositoryButton() {
-        await this.newRepositoryButton.click()
+        await this.click(Locators.repositoriesPage.newRepositoryButton)
     }
 }

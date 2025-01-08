@@ -1,38 +1,23 @@
-import { expect, Locator, Page } from "@playwright/test"
+import { Locators } from "../../utils/locators"
+import { BasePage } from "../BasePage"
 
-export class NavigationBar {
-    readonly page: Page
-    readonly overviewTab: Locator
-    readonly repositoriesTab: Locator
-    readonly projectsTab: Locator
-    readonly packagesTab: Locator
-    readonly starsTab: Locator
-
-    constructor(page: Page) {
-        this.page = page
-        this.overviewTab = page.locator('#overview-tab')
-        this.repositoriesTab = page.locator('#repositories-tab')
-        this.projectsTab = page.locator('#projects-tab')
-        this.packagesTab = page.locator('#packages-tab')
-        this.starsTab = page.locator('#stars-tab')
-    }
-
+export class NavigationBar extends BasePage {
     async clickOnTab(tabName: string) {
         switch (tabName) {
             case 'Overview':
-                await this.overviewTab.click()
+                await this.click(Locators.naviagtionBar.overviewTab)
                 break
             case 'Repositories':
-                await this.repositoriesTab.click()
+                await this.click(Locators.naviagtionBar.repositoriesTab)
                 break
             case 'Projects':
-                await this.projectsTab.click()
+                await this.click(Locators.naviagtionBar.projectsTab)
                 break
             case 'Packages':
-                await this.packagesTab.click()
+                await this.click(Locators.naviagtionBar.packagesTab)
                 break
             case 'Stars':
-                await this.starsTab.click()
+                await this.click(Locators.naviagtionBar.starsTab)
                 break
             default:
                 throw new Error('This tab does not exist.')
