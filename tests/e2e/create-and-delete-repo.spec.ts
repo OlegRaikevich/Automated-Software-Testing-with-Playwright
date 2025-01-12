@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test"
 import { getRandomString, getRandomNumber } from "../../utils/data-helpers"
 import { PageObjectManager } from "../../page-objects/PageObjectManager"
+import exp from "constants"
 
 test.describe("Create repository", () => {
     let pageManager: PageObjectManager
-
     let repoName: string
     let repoDescription: string
 
@@ -26,17 +26,31 @@ test.describe("Create repository", () => {
 
         await pageManager.newRepositoryPage.createRepository(repoName, repoDescription)
 
-        const repositoryTitle = await page.locator("//a[contains(text(),'test-repo')]")
+        const repositoryTitle = page.locator("//a[contains(text(),'test-repo')]")
         await expect(repositoryTitle).toBeVisible()
-        const setupInstructionBox = await page.locator("//body/div[1]/div[6]/div[1]/main[1]/turbo-frame[1]/div[1]/div[1]/git-clone-help[1]/div[1]")
+        const setupInstructionBox = await page.locator(
+            "//body/div[1]/div[6]/div[1]/main[1]/turbo-frame[1]/div[1]/div[1]/git-clone-help[1]/div[1]"
+        )
         await expect(setupInstructionBox).toBeVisible()
     })
 
-    // test("Psitive scenario for deleting repository", async ({ page }) => {
-    //     await userPanel.clickOnButton('User label')
-    //     await userPanel.clickOnButton('Your repositories')
-    //     await repositoriesPage
-    // })
+    test("Psitive scenario for deleting repository", async ({ page }) => {
+        // Move to repositories page
+        await pageManager.userPanel.clickOnButton('User label')
+        await pageManager.userPanel.clickOnButton('Your repositories')
+        
+        // Move to new repo
+        const createdRepositoryLink = page.locator(`//a[contains(text(),'${repoName}')]`)
+        await expect(createdRepositoryLink).toBeVisible()
+        await createdRepositoryLink.click()
+
+        // Deleting repo
+        await pageManager.repositoriesPage.deleteRepository(repoName)
+
+        const deletedRepositoryLink = page.locator(`//a[contains(text(),'${repoName}')]`)
+        await expect(deletedRepositoryLink).toHaveCount(0)
+        
+    })
 
 
 })
