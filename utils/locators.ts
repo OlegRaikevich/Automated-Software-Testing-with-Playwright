@@ -33,6 +33,10 @@ export const Locators = {
         createRepositoryButton: "//span[contains(text(),'Create repository')]"
     },
     repositoriesPage: {
-        newRepositoryButton: '.text-center.btn.btn-primary.ml-2'
+        newRepositoryButton: '.text-center.btn.btn-primary.ml-2',
+        settingsTab: "a[data-tab-item='settings-tab']",
+        deleteRepositoryButton: "button.btn-danger",
+        confirmDeleteInput: "input[name='verify']",
+        confirmDeleteButton: "button[type='submit']"
     }
 }
